@@ -10,9 +10,7 @@
 		58D1D51D1A7E7B7E000C4BEC /* ku4objc_tempDependent.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D1D51C1A7E7B7E000C4BEC /* ku4objc_tempDependent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58D1D5351A7E7BC9000C4BEC /* subClassTemp.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D1D5331A7E7BC9000C4BEC /* subClassTemp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58D1D5361A7E7BC9000C4BEC /* subClassTemp.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1D5341A7E7BC9000C4BEC /* subClassTemp.m */; };
-		58D1D53A1A7E8573000C4BEC /* ku4objc_temp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D1D5391A7E8573000C4BEC /* ku4objc_temp.framework */; };
 		58D1D5401A7E894B000C4BEC /* subClassTempTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1D53F1A7E894B000C4BEC /* subClassTempTest.m */; };
-		58D1D5411A7E899A000C4BEC /* ku4objc_temp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D1D5391A7E8573000C4BEC /* ku4objc_temp.framework */; };
 		58D1D5421A7E8A2C000C4BEC /* ku4objc_tempDependent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D1D5171A7E7B7E000C4BEC /* ku4objc_tempDependent.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +32,6 @@
 		58D1D5281A7E7B7E000C4BEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58D1D5331A7E7BC9000C4BEC /* subClassTemp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = subClassTemp.h; sourceTree = "<group>"; };
 		58D1D5341A7E7BC9000C4BEC /* subClassTemp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subClassTemp.m; sourceTree = "<group>"; };
-		58D1D5391A7E8573000C4BEC /* ku4objc_temp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ku4objc_temp.framework; path = lib/ku4objc_temp.framework; sourceTree = "<group>"; };
 		58D1D53F1A7E894B000C4BEC /* subClassTempTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subClassTempTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,7 +40,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D1D53A1A7E8573000C4BEC /* ku4objc_temp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,7 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D1D5411A7E899A000C4BEC /* ku4objc_temp.framework in Frameworks */,
 				58D1D5421A7E8A2C000C4BEC /* ku4objc_tempDependent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +59,6 @@
 			children = (
 				58D1D5191A7E7B7E000C4BEC /* ku4objc_tempDependent */,
 				58D1D5261A7E7B7E000C4BEC /* ku4objc_tempDependentTests */,
-				58D1D53C1A7E85EB000C4BEC /* Frameworks */,
 				58D1D5181A7E7B7E000C4BEC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,14 +106,6 @@
 				58D1D5281A7E7B7E000C4BEC /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		58D1D53C1A7E85EB000C4BEC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				58D1D5391A7E8573000C4BEC /* ku4objc_temp.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nDEVICE_PATH=\"${OBJROOT}/UninstalledProducts/${TARGET_NAME}.framework\"\nSIMULATOR_PATH=\"${SYMROOT}/../../../../Products/Debug-iphonesimulator/${TARGET_NAME}.framework\"\nARCHIVE_PATH=\"${SRCROOT}/_Archive\"\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\nif [ -d \"${DEVICE_PATH}\" ]; then\nif [ -d \"${SIMULATOR_PATH}\" ]; then\nrm -rf \"${ARCHIVE_PATH}\"\nmkdir \"${ARCHIVE_PATH}\"\ncp -r \"${DEVICE_PATH}\" \"${ARCHIVE_PATH}\"\nlipo -create \"${DEVICE_PATH}/${TARGET_NAME}\" \"${SIMULATOR_PATH}/${TARGET_NAME}\" -output \"${ARCHIVE_PATH}/${TARGET_NAME}.framework/${TARGET_NAME}\"\nfi\nfi\nfi\nexit 0;\n";
+			shellScript = "set -e\n\nDEVICE_BIN=\"${OBJROOT}/UninstalledProducts/${TARGET_NAME}.framework\"\nSIMULATOR_BIN=\"${SYMROOT}/../../../../Products/Debug-iphonesimulator/${TARGET_NAME}.framework\"\n\nARCHIVE_PATH=\"${SRCROOT}/_Archive\"\nrm -rf \"${ARCHIVE_PATH}\"\nmkdir \"${ARCHIVE_PATH}\"\n\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\n\nif [ -d \"${DEVICE_BIN}\" ]; then\nDEVICE_PATH=\"${ARCHIVE_PATH}/Release\"\nmkdir \"${DEVICE_PATH}\"\ncp -r \"${DEVICE_BIN}\" \"${DEVICE_PATH}\"\n\nif [ -d \"${SIMULATOR_BIN}\" ]; then\nSIMULATOR_PATH=\"${ARCHIVE_PATH}/Debug\"\nmkdir \"${SIMULATOR_PATH}\"\ncp -r \"${DEVICE_BIN}\" \"${SIMULATOR_PATH}\"\nlipo -create \"${DEVICE_BIN}/${TARGET_NAME}\" \"${SIMULATOR_BIN}/${TARGET_NAME}\" -output \"${SIMULATOR_PATH}/${TARGET_NAME}.framework/${TARGET_NAME}\"\n\nfi\nfi\nfi\nexit 0;\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -365,11 +351,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/lib/$(CONFIGURATION)",
 				);
 				INFOPLIST_FILE = ku4objc_tempDependent/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib/$(CONFIGURATION)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -385,11 +371,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/lib/$(CONFIGURATION)",
 				);
 				INFOPLIST_FILE = ku4objc_tempDependent/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib/$(CONFIGURATION)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -401,14 +387,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/lib/$(CONFIGURATION)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ku4objc_tempDependentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib/$(CONFIGURATION)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -419,10 +405,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(PROJECT_DIR)/lib",
+					"$(PROJECT_DIR)/lib/$(CONFIGURATION)",
 				);
 				INFOPLIST_FILE = ku4objc_tempDependentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/lib/$(CONFIGURATION)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -446,6 +432,7 @@
 				58D1D52F1A7E7B7E000C4BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		58D1D5301A7E7B7E000C4BEC /* Build configuration list for PBXNativeTarget "ku4objc_tempDependentTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +441,7 @@
 				58D1D5321A7E7B7E000C4BEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
